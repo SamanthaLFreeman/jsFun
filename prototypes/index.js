@@ -24,21 +24,27 @@ const kittyPrompts = {
     
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.filter(kitten => kitten.color === 'orange' ).map(kitten => kitten.name);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used the filter prototype method first, because it goes through and checks all of the objects 
+    // in the array and then returns a new array only with the elements that pass my function. However, it returns
+    // the whole element, so I then had to map through the array, which also creates a new array, but I was then able to
+    // set it up so it only returned the names of the kittens.
   },
 
   sortByAge() {
     // Sort the kitties by their age
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.sort((a, b) => b.age - a.age);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // For this test I only needed to use the sort prototype method.
+    // With this method I compared the first and second element and then it
+    // returns in the order from largest to smallest. I had to use dot notation,
+    // so the method only checked the ages of the kittens.
   },
 
   growUp() {
@@ -55,9 +61,16 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties;
+    result.forEach(kitten => kitten.age += 2);
     return result;
   }
+
+  // Annotation:
+  // For this test I used the forEach prototype method, because it
+  // doesn't return anything I had to first assign the array to the variable.
+  // Then used the forEach method to loop through the area and only update the age,
+  // so the whole object return with the updated value.
 };
 
 
@@ -87,11 +100,23 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = clubs.reduce((acc, club) => {
+      club.members.forEach(member => {
+        if (!acc[member]) {
+          acc[member] = [];
+        }
+        acc[member].push(club.club);
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    //I used reduce to add each acculmulator together into a new object.
+    //Since the members were an array, I had to first iterate from all of the
+    //members, so I could add them as keys ot the object. If the member wasn't assigned
+    //then it added a new key with the name assigned to an empty array. Then their club
+    //was pushed into the empty array.
   }
 };
 
@@ -122,12 +147,20 @@ const modPrompts = {
     //   { mod: 3, studentsPerInstructor: 10 },
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+  
+    const result = mods;
+    result.forEach(mod => {
+      const modCount = mod.studentsPerInstructor = mod.students / mod.instructors;
+      delete mod.students;
+      delete mod.instructors;
+      return modCount;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I iterated through the array of objects and at each object I add a new key of studentsPerInstructor
+    // with a value of each specific objects number of students divided by number of instructiors. Since the students
+    // and instructors have to be replaced. I used the delete operator to remove both keys from the object.
   }
 };
 
