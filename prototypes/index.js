@@ -191,11 +191,14 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [];
+    cakes.map(cake => result.push({'flavor': cake.cakeFlavor, 'inStock': cake.inStock}));
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I created a new array for result then used map to iterate through each object in the existing array.
+    // Then at each element, only specific keys are pushed in as a new object literal. I define the key names used
+    // and then defined the key values for each object.
   },
 
   onlyInStock() {
@@ -219,22 +222,27 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(cake => cake.inStock > 0);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used filter to check each element of the array. Then dot notation to specify
+    // which key value I wanted to check. If the conditional is true, then only those
+    // objects are included in the new array of cakes.
   },
   
   totalInventory() {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => acc + cake.inStock, 0);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // With reduce prototype method I can add the inStock value at each iteration. I start
+    // with an accumulator which I add the current inStock value for each element using dot
+    // notation. Then each element is added to the existing total until it is done iterating
+    // through the array.
   },
 
   allToppings() {
@@ -242,11 +250,24 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+    const result = cakes.map(cake => cake.toppings).reduce((acc, toppings) => {
+      toppings.forEach(topping => {
+        if(!acc.includes(topping)) {
+          acc.push(topping);
+        }
+      });
+
+      return acc;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I use map to iterate through the existing array and create a new array of just the cakes toppings.
+    // Then I chained reduce with a forEach nested inside. For each iteration inside the nested arrays, the  
+    // conditional checks if the topping is not in the array. If so then it pushes the toppings into the new array 
+    // created with reduce.
   },
 
   groceryList() {

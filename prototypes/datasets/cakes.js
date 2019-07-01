@@ -43,6 +43,6 @@ const cakes = [
   }
 ];
 
-module.exports = {
+module.exports = { 
   cakes
 };
