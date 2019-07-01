@@ -316,11 +316,12 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(classroom => classroom.program === 'FE');
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used filter and at each iteration it checks if the key of program is strictly
+    // equal to FE. Then it only returns the elements or objects that return true.
   },
 
   totalCapacities() {
@@ -331,7 +332,7 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'REPLACE WITH YOUR RESULT HERE'; 
     return result;
 
     // Annotation:
@@ -341,11 +342,12 @@ const classPrompts = {
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => a.capacity - b.capacity);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used the sort prototype method to sort by the smallest capacity to the largest capacity
+    // key in each object.
   }
 };
 
