@@ -281,11 +281,21 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(cake => cake.toppings).reduce((acc, toppings) => {
+      toppings.forEach(topping => {
+        !acc[topping] ? acc[topping] = 1 : acc[topping]++;   
+      });
+    
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // First I iterate through the array of cakes to retrieve only the cake toppings. Then I 
+    // used reduce to add the toppings into an object. Since the toppings were inside of their own arrays
+    // I had to use a forEach prototype method to iterate through each topping in their array. Then
+    // I check if there is a key named after the topping within the new object. If it isn't then it should add
+    // a key with that name and a 1. If it already exists then it should add to the existing number.
   }
 };
 
@@ -373,11 +383,13 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, brewery) => acc + brewery.beers.length, 0);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used the reduce prototype method and added the length of the beers array, which was
+    // nested inside each of the breweries. This gave the total number of beers and then added them
+    // to the accumulator.
   },
 
   getBreweryBeerCount() {
@@ -389,11 +401,14 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [];
+    breweries.map(brewery => result.push({'name': brewery.name, 'beerCount': brewery.beers.length}));
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I assigned result to an empty array. Then I iterate through the breweries array using
+    // map prototype method. At each element an object literal is created with the existing name and beers.length,
+    // which are filled in as values to the new object literal and then pushed into the empty array.
   },
 
   findHighestAbvBeer() {
