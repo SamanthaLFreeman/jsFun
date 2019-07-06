@@ -342,11 +342,28 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE'; 
+    const result = classrooms.reduce((acc, classroom) => {
+      if (!acc.feCapacity) {
+        acc.feCapacity = 0;
+      }
+      if (!acc.beCapacity) {
+        acc.beCapacity = 0;
+      }
+      if (classroom.program === 'FE') {
+        acc.feCapacity += classroom.capacity;
+      } else if (classroom.program === 'BE') {
+        acc.beCapacity += classroom.capacity;
+      }
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used reduce prototype method to iterate through the existing array of values.
+    // First checking if there is an existing key value of that name in the object. If not
+    // then I have to add a key with a starting value. Then I run through with an additional
+    // conditional, which checks what program they are in and adds to the new key value ands and
+    // reassigns to the new key value.
   },
 
   sortByCapacity() {
@@ -416,11 +433,26 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, brewery) => {
+      if (!acc.abv) {
+        acc.abv = 0;
+      }
+      brewery.beers.forEach(beer => {
+        if (beer.abv > acc.abv) {
+          acc = beer;
+        }
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used the reduce prototype method to iterate through every brewery and create a starting 
+    // value of an object. I then initialize that the starting abv of the object is 0, so other beer
+    // abvs can be compared to it. Then I have to use a for Each to loop through the beers arrays within
+    // each brewery. While iterating I have each iteration, check if the abv of the current beer is greater
+    // then my current accumulator value. If so then it replaces the current object with the object with the
+    // highest value.
   }
 };
 
@@ -464,11 +496,22 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((acc, instructor) => {
+      cohorts.forEach(cohort => {
+        if (instructor.module === cohort.module) {
+          acc.push({'name': instructor.name, 'studentCount': cohort.studentCount});
+        }
+      });
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used reduce to iterate through all of the instructors and create an initial value
+    // of an empty array. Then within I used the for each prototype method to also check the cohorts
+    // then at each iteration it compares the module of the instructor and cohort. If they match, then I
+    // push a new object into the empty array with the current instructor's name and the current cohort's
+    // student count.
   },
 
   studentsPerInstructor() {
@@ -478,11 +521,21 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((acc, cohort) => {
+      let current = `cohort${cohort.cohort}`;
+      if (!acc[current]){
+        acc[current] = 0;
+      }
+      acc[current] = cohort.studentCount/instructors.filter(instructor => instructor.module === cohort.module).length;
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // First I use reduce prototype method to create an initial object. While it iterates I create a new key name using a
+    // template literal adding the cohorts value to cohort to create a new key name. Then I check if the key exists, if not
+    // it creates that key with an initial value of zero. Then I update this value taking the value it finds in each iteration
+    // of the cohorts array and dividing by the filtered instructors array's length, which gives the number of instructors.
   },
 
   modulesPerTeacher() {
@@ -500,11 +553,33 @@ const turingPrompts = {
     //     Will: [1, 2, 3, 4]
     //   }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((acc, instructor) => {
+      if(!acc[instructor.name]) {
+        acc[instructor.name] = [];
+      }
+      instructor.teaches.forEach(skill => {
+        cohorts.forEach(cohort => {
+          cohort.curriculum.forEach(curriculum => {
+            if(curriculum === skill) {
+              if(!acc[instructor.name].includes(cohort.module)) {
+                acc[instructor.name].push(cohort.module);
+                acc[instructor.name].sort((a, b) => a - b);
+              }
+            }
+          });
+        });
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I used reduce prototype method to create a new object. Within the object I created new keys with the instructors names
+    // by checking if they existed already and if not I added each key with an empty array. Then used for each to iterate through
+    // the individual instructor teaches array to retrieve each value in the array. In addition, used another for each to also iterate
+    // through the cohort curriculum array to retrieve those values. Then used two conditionals, first one to compare if the curriculum and skill
+    // matched and second one to see if each instructors array doesn't already have the module number inside the array. If both are true then the 
+    // module number is pushed into the array and I used sort, because the arrays were in alphanumeric order.
   },
 
   curriculumPerTeacher() {
@@ -517,11 +592,33 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((acc, cohort) => {
+      cohort.curriculum.forEach(skill => {
+        if(!acc[skill]) {
+          acc[skill] = [];
+        }
+        instructors.forEach(instructor => {
+          instructor.teaches.forEach(curriculum => {
+            if(curriculum === skill) {
+              if(!acc[skill].includes(instructor.name)) {
+                acc[skill].push(instructor.name);
+              }
+            }
+          });
+        });
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // To create a new object, I used reduce prototype method then within
+    // each iteration I iterate through the curriculum method within each cohort. During
+    // this I check if the key exists for the curriculum name. If not, then I add the key with 
+    // an empty array to be pushed into. Then I iterate through the instructors array and at each
+    // instructor I iterate through what they teach. At each iteration I check if what they teach matches
+    // the cohorts skill and if the array doesn't include that teacher's name already. If both are true, then
+    // the teachers name is pushed into the array.
   }
 };
 
