@@ -16,11 +16,13 @@ const context = {
 
 
     // What is the value of `this` when we call ship.fly()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // The value of this is set when the function is created. Thus referring to
+    // the global object before the new instance for ship is created.
+
   },
 
   exerciseB() {
@@ -30,11 +32,11 @@ const context = {
     }
     
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // This refers to what the function is within, which is the global object.
   },
 
   exerciseC() {
@@ -49,11 +51,12 @@ const context = {
     el.addEventListener('click', car.getInfo);
 
     // What is the value of `this` when a user clicks on our element and car.getInfo() is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'el';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // This refers to the name of object. Once clicked the getInfo method is invoked.
+    // This method is ES5, so the value of this set when the function is executed.
   },
 
   exerciseD() {
@@ -72,7 +75,7 @@ const context = {
     var breed = dog.getBreed();
 
     // What is the value of `this` when we call breed()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = 'global window object';
     return result;
 
     // Annotation: 
@@ -88,11 +91,12 @@ const context = {
 
 
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
-    // Write your annotation here as a comment
+    // The value of this is set when the function is created.
+
   },
 
   exerciseF() {
