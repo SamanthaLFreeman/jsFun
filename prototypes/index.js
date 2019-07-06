@@ -649,11 +649,28 @@ const bossPrompts = {
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = Object.values(bosses).reduce((acc, boss) => {
+      acc.push(sidekicks.reduce((acc2, sidekick) => {
+        if (!acc2['bossName']) {
+          acc2['bossName'] = boss.name;
+          acc2['sidekickLoyalty'] = 0;
+        }
+        if(boss.name === sidekick.boss) {
+          acc2['sidekickLoyalty'] += sidekick.loyaltyToBoss;
+        }
+        return acc2;
+      }, {}));
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Since bosses was an object with objects. I used Object.values to turn the values
+    // of the object into an array. Then with reduce I created an array to push objects into.
+    // Using a secondary reduce within the push array method. I checked if the bossname was already
+    // in the array. If not, then a new boss was created with a starting value of 0 for loyalty. Then
+    // I had a second conditional that checked if the boss name and sidekick's boss matched. If true, then
+    // the loyalty was added and reassigned to the side kicks loyalty at that specific iteration.
   }
 };
 
