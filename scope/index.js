@@ -29,11 +29,19 @@ const scope = {
 
     // Log D: personC
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 'Ben'},
+      {'B': 'CardiB'},
+      {'C': 'CardiB'},
+      {'D': 'Paul'}
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // The first log is the existing global variable of Ben, because it has been
+    // untouched. Prior to log b, the person is reassigned based on the reassigned person b.
+    // Then later the reassigned person b is requested in log c. Lastly, log d refers to person c
+    // which was reassigned for the second time.
   },
 
   exerciseB() {
@@ -63,11 +71,21 @@ const scope = {
 
     // Log D: number
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 75},
+      {'B': 64},
+      {'C': 64},
+      {'D': 30}
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Once the function is invoked the variable is assigned to 75. Because the
+    // variable is reassigned in a scope block with let, the variable doesn't reassign
+    // outside of the block. The next function the variable is reassigned to a variable 
+    // missing a key name, so it is hoisted to the top of the function and treated like a
+    // global variable. Thus affecting the next two logs. However, it is wihin the function,
+    // so once outside the number is assigned to the existing global variable which is 30.
   },
 
   exerciseC() {
@@ -97,11 +115,20 @@ const scope = {
 
     // Log D: greeting
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 'Yo'},
+      {'B': 'Hey'},
+      {'C': 'Hey'},
+      {'D': 'Hello'}
+    ];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Because of block scoping, the let variable isn't available outside. So 
+    // the variable is assigned to the variable within the function. However, the 
+    // function with a variable without a key word is hoisted up and becomes a global 
+    // variable, affecting the next two logs. The last log is outside of the function and
+    // thus refers to the global variable.
   },
 
   exerciseD() {
@@ -131,7 +158,12 @@ const scope = {
 
     // Log D: greeting
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 'hi'},
+      {'B': 'welcome'},
+      {'C': 'welcome'},
+      {'D': 'howdy'}
+    ];
     return result;
 
     // Annotation:
@@ -163,7 +195,12 @@ const scope = {
 
     // Log D: name
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 'Nathaniel'},
+      {'B': 'Nathaniel'},
+      {'C': 'Brittany'},
+      {'D': 'Brittany'}
+    ];
     return result;
 
     // Annotation:
