@@ -196,9 +196,9 @@ const scope = {
     // Log D: name
 
     const result = [
+      {'C': 'Brittany'},
       {'A': 'Nathaniel'},
       {'B': 'Nathaniel'},
-      {'C': 'Brittany'},
       {'D': 'Brittany'}
     ];
     return result;
@@ -336,7 +336,16 @@ const scope = {
     eatSnack();
     // Log E: hunger
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      {'A': 75},
+      {'B': 0},
+      {'C': 75},
+      {'D': 80},
+      {'A': 55},
+      {'B': 0},
+      {'C': 55},
+      {'E': 55}
+    ];
     return result;
 
     // Annotation:

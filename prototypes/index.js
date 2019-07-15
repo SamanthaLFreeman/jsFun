@@ -708,7 +708,16 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = Object.values(constellations).reduce((acc, constellation) => {
+      constellation.stars.forEach(constStar => {
+        stars.forEach(star => {
+          if(constStar.includes(star.name)) {
+            acc.unshift(star);
+          }
+        });
+      });
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
@@ -726,7 +735,15 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((acc, star) => {
+      if (!acc[star.color]) {
+        acc[star.color] = [];
+      }
+      if (!acc[star.color].includes(star.color)) {       
+        acc[star.color].push(star);
+      }
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
@@ -779,7 +796,17 @@ const ultimaPrompts = {
     // Return the sum of the amount of damage for all the weapons that our characters can use
     // Answer => 113
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = characters.reduce((acc, character) => {
+      character.weapons.forEach(weapon => {
+        let keys = Object.keys(weapons);
+        return keys.forEach(weapon2 => {
+          if (weapon === weapon2) {
+            acc += weapons[weapon2].damage;
+          }
+        });
+      });
+      return acc;
+    }, 0);
     return result;
 
     // Annotation:

@@ -75,7 +75,7 @@ const context = {
     var breed = dog.getBreed();
 
     // What is the value of `this` when we call breed()?
-    // const result = 'global window object';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
@@ -163,7 +163,7 @@ const context = {
     obj.method();
 
     // What is the value of `this` when we call obj.arrowFunction()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'obj';
     return result;
 
     // Annotation: 
