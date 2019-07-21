@@ -235,7 +235,13 @@ const scope = {
 
     // Log E: dog
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'Spot' },
+      { 'B': 'Spot' },
+      { 'C': 'Biscuit' },
+      { 'D': 'Biscuit' },
+      { 'E': 'Biscuit' }
+    ];
     return result;
 
     // Annotation:
@@ -265,7 +271,12 @@ const scope = {
 
     // Log D: fruit
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': undefined },
+      { 'B': 'mango' },
+      { 'C': 'mango' },
+      { 'D': 'apple' }
+    ];
     return result;
 
     // Annotation:

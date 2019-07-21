@@ -521,14 +521,23 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
+    // const result = cohorts.reduce((acc, cohort) => {
+    //   let current = `cohort${cohort.cohort}`;
+    //   if (!acc[current]){
+    //     acc[current] = 0;
+    //   }
+    //   acc[current] = cohort.studentCount/instructors.filter(instructor => instructor.module === cohort.module).length;
+    //   return acc;
+    // }, {});
+    // return result;
+
     const result = cohorts.reduce((acc, cohort) => {
+      let instructorsLength = instructors.filter(instructor => instructor.module === cohort.module).length;
       let current = `cohort${cohort.cohort}`;
-      if (!acc[current]){
-        acc[current] = 0;
-      }
-      acc[current] = cohort.studentCount/instructors.filter(instructor => instructor.module === cohort.module).length;
+      acc[current] = cohort.studentCount/instructorsLength;
       return acc;
     }, {});
+
     return result;
 
     // Annotation:
