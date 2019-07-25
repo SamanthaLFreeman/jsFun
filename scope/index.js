@@ -272,7 +272,7 @@ const scope = {
     // Log D: fruit
 
     const result = [
-      { 'A': undefined },
+      { 'A': 'reference error' },
       { 'B': 'mango' },
       { 'C': 'mango' },
       { 'D': 'apple' }
@@ -316,7 +316,13 @@ const scope = {
 
     fn1();
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 4 },
+      { 'D': 9 },
+      { 'E': 10 },
+      { 'B': 9 },
+      { 'C': 4 }
+    ];
     return result;
 
     // Annotation:
@@ -397,7 +403,14 @@ const scope = {
     // Log E: sandwich
     // Log F: amandaBynes
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [
+      { 'A': 'ketchup sandwich' },
+      { 'D': 'gouda' },
+      { 'B': undefined },
+      { 'C': undefined },
+      { 'E': 'ketchup sandwich' },
+      { 'F': undefined }
+    ];
     return result;
 
     // Annotation:

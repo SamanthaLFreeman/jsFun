@@ -864,7 +864,12 @@ const dinosaurPrompts = {
     //   'Jurassic World: Fallen Kingdom': 18
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = movies.reduce((acc, movie) => {
+      Object.keys(dinosaurs).forEach(dino => {
+        acc[movie.title] = dino;
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
@@ -897,7 +902,20 @@ const dinosaurPrompts = {
       }
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = movies.reduce((dirAndAge, movie) => {
+      let averageAge = movie.cast.reduce((sum, castMember) => {
+        sum += movie.yearReleased - humans[castMember].yearBorn;
+        return sum;
+      }, 0) / movie.cast.length;
+      if (!dirAndAge[movie.director]) {
+        dirAndAge[movie.director] = { [movie.title]: Math.floor(averageAge) };
+      } else if (dirAndAge[movie.director] && !dirAndAge[movie.director][movie.title]) {
+        dirAndAge[movie.director][movie.title] = Math.floor(averageAge);
+      }
+
+      return dirAndAge;
+    }, {});
+    
     return result;
 
     // Annotation:
@@ -930,7 +948,7 @@ const dinosaurPrompts = {
       }]
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'RESULTS';
     return result;
 
     // Annotation:
